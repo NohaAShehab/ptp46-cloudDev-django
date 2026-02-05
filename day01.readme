@@ -1,0 +1,32 @@
+Day 01 - Summary
+
+Work Completed
+- Designed landing pages for students and courses.
+- Added inline styling with responsive sections and card layouts.
+- Organized content for hero, features, and footer sections.
+
+Notes
+- Templates are stored under the relevant app `templates` folders.
+- Pages can be previewed through their existing routes.
+
+Project Setup Notes
+- Create a new project: `django-admin startproject onlineStore`
+- Create apps:
+  - `python manage.py startapp products`
+  - `python manage.py startapp aboutus`
+  - `python manage.py startapp contactus`
+- Add the three apps to `INSTALLED_APPS`.
+- Create templates using template inheritance (base + child pages).
+- Run the server: `python manage.py runserver`
+
+Resources
+- https://www.udemy.com/course/python-django-the-practical-guide/learn/lecture/26372706?start=0#overview
+- https://www.djangoproject.com/
+- https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Django
+- https://www.youtube.com/watch?v=C9GQU7nPF3E
+- https://www.digitalocean.com/community/conceptual-articles/uv-python-package-manager
+- https://pypi.org/project/pip/
+- https://docs.python.org/3/library/venv.html
+- https://pandas.pydata.org/
+- https://refactoring.guru/design-patterns
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
