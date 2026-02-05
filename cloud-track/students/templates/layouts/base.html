@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Courses - Cloud Track</title>
+    <title>{% block title %} {% endblock %}</title>
     <style>
         :root {
             --bg: #0b1020;
@@ -173,18 +172,19 @@
             gap: 12px;
         }
     </style>
+
 </head>
 <body>
-    <div class="container">
-        <nav class="nav">
+
+   <nav class="nav">
             <div class="brand">
                 <div class="brand-logo">CT</div>
                 Cloud Track Courses
             </div>
             <div class="nav-links">
-                <a href="#catalog">Catalog</a>
-                <a href="#pathways">Pathways</a>
-                <a href="#faq">FAQ</a>
+                <a href="">Courses</a>
+                <a href="">Students</a>
+                <a href="">FAQ</a>
             </div>
             <div class="nav-links">
                 <a class="btn btn-outline" href="#signin">Sign in</a>
@@ -192,70 +192,21 @@
             </div>
         </nav>
 
-        <section class="hero">
-            <div>
-                <span class="pill">● New lessons weekly</span>
-                <h1>Pick a course, build a skill, ship a project.</h1>
-
-                {{courses}}
-
-                {% for course in courses %}
-                    <li> {{course}} </li>
-                {% endfor %}
-                <p>
-                    Short, focused courses designed for busy learners. Choose a path or mix modules
-                    across cloud foundations, DevOps, and backend deployment.
-                </p>
-                <div class="nav-links">
-                    <a class="btn btn-primary" href="#catalog">Explore catalog</a>
-                    <a class="btn btn-outline" href="#pathways">See learning paths</a>
-                </div>
-            </div>
-            <div class="card">
-                <h2>Course snapshot</h2>
-                <p>Average lesson time: 20-30 minutes. Practice labs included.</p>
-                <div class="meta">
-                    <span>Beginner to advanced</span>
-                    <span>Self-paced</span>
-                    <span>Certificate</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="catalog">
-            <h2>Featured courses</h2>
-            <p>Start with a foundation, then specialize.</p>
-            <div class="course-grid">
-                {% for course in courses %}
-                <div class="card">
-                    <span class="pill">Cloud</span>
-                    <h3>{{course}}</h3>
-                    <p>Compute, storage, networking, and security fundamentals with hands-on labs.</p>
-                    <div class="meta">
-                        <span>6 modules</span>
-                        <span>18 labs</span>
-                    </div>
-                </div>
-                {% endfor %}
-
-
-            </div>
-        </section>
-
-        <section class="section" id="pathways">
-            <div class="cta">
-                <div>
-                    <h3>Need a guided path?</h3>
-                    <p>Choose a learning path and follow a curated weekly roadmap.</p>
-                </div>
-                <a class="btn btn-primary" href="#faq">View paths</a>
-            </div>
-        </section>
-
-        <footer class="footer" id="faq">
+   <div class="container">
+   <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div style="background: green">
+        {% block main %}
+        {% endblock %}
+    </div>
+   </div>
+    <footer class="footer" id="faq">
             <div>Questions? support@cloudtrack.dev</div>
             <div>© 2026 Cloud Track Courses. All rights reserved.</div>
         </footer>
-    </div>
+
+
 </body>
 </html>

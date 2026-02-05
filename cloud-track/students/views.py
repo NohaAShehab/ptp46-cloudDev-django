@@ -61,10 +61,9 @@ def landing(request):
 
 
 
-
-
-
-
+def index(request):
+    return render(request, 'students/index.html',
+                  context={'students': students})
 
 
 

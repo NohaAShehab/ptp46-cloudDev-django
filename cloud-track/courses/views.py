@@ -4,4 +4,6 @@ from django.shortcuts import render
 
 
 def courses_landing(request):
-    return render(request, 'courses/landing.html')
+    courses =["python", "django", 'Kubernetes', 'jenkins', 'SQL', 'MicroService']
+    return render(request, 'courses/landing.html',
+                  context={'courses':courses})

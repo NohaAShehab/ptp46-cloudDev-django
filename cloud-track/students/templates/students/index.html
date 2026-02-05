@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+
+<h1> Hello from Students page ....</h1>
+
+{% block main %}
+  <h1> Hello from main block </h1>
+{% endblock %}
+
+
+{% block content %}
+{{students }}
+{% for student in students %}
+    <li> {{student.name}}</li>
+{% endfor %}
+{% endblock %}

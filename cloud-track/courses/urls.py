@@ -5,5 +5,5 @@ from courses.views import courses_landing
 
 urlpatterns = [
     # courses
-    path('landing', courses_landing, name='courses.index'),
+    path('landing', courses_landing, name='courses.landing'),
 ]
