@@ -1,0 +1,5 @@
+
+# serving static files ??
+
+
+https://docs.djangoproject.com/en/6.0/ref/templates/builtins/#add

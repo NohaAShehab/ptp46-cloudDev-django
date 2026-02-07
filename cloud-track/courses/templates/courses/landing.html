@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -197,11 +198,6 @@
                 <span class="pill">● New lessons weekly</span>
                 <h1>Pick a course, build a skill, ship a project.</h1>
 
-                {{courses}}
-
-                {% for course in courses %}
-                    <li> {{course}} </li>
-                {% endfor %}
                 <p>
                     Short, focused courses designed for busy learners. Choose a path or mix modules
                     across cloud foundations, DevOps, and backend deployment.
@@ -229,8 +225,11 @@
                 {% for course in courses %}
                 <div class="card">
                     <span class="pill">Cloud</span>
-                    <h3>{{course}}</h3>
-                    <p>Compute, storage, networking, and security fundamentals with hands-on labs.</p>
+                    <h3>{{course.name}}</h3>
+<!--                    <img src="{% static 'courses/images/docker.png' %}" alt="{{course.name}}" >-->
+                    <img width="200" height="200"
+                            src="{% static 'courses/images/'|add:course.image %}" alt="{{course.name}}" >
+
                     <div class="meta">
                         <span>6 modules</span>
                         <span>18 labs</span>
@@ -257,5 +256,6 @@
             <div>© 2026 Cloud Track Courses. All rights reserved.</div>
         </footer>
     </div>
+<!--    <script src="{% static 'courses/js/test.js' %}"></script>-->
 </body>
 </html>
