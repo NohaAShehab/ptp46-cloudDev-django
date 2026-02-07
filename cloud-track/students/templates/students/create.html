@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Create Student{% endblock %}
+
+{% block styles %}
+    <style>
+        .form-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 18px 36px rgba(6, 10, 24, 0.28);
+            width: 100%;
+        }
+        .form-title {
+            margin: 0 0 12px;
+            font-size: 24px;
+        }
+        .form-grid {
+            display: grid;
+            gap: 14px;
+        }
+        .field {
+            display: grid;
+            gap: 6px;
+        }
+        label {
+            font-size: 13px;
+            color: var(--muted);
+        }
+        input,
+        select {
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--text);
+            font-size: 14px;
+        }
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .ghost-btn {
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="form-card">
+        <h1 class="form-title">Create Student</h1>
+        <form method="post" >
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="field">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" placeholder="Student name" required>
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="student@example.com">
+                </div>
+                <div class="field">
+                    <label for="grade">Grade</label>
+                    <input id="grade" name="grade" type="number" min="0" placeholder="e.g. 85">
+                </div>
+                <div class="field">
+                    <label for="age">Age</label>
+                    <input id="age" name="age" type="number" min="1" placeholder="e.g. 20">
+                </div>
+                <div class="field">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                        <option value="">Select</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="image">Image URL</label>
+                    <input id="image" name="image" type="text" placeholder="https://...">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn" type="submit">Save</button>
+                <a class="ghost-btn" href="/students/index">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

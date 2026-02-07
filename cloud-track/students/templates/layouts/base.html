@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Online Store{% endblock %}</title>
     <style>
         :root {
             --bg: #0b1020;
-            --panel: #141d34;
-            --text: #eef2ff;
-            --muted: #9aa6c8;
-            --brand: #4fb6ff;
-            --accent: #6d5cff;
-            --warm: #ffb454;
+            --panel: rgba(17, 24, 39, 0.85);
+            --text: #f8fafc;
+            --muted: #cbd5f5;
+            --brand: #38bdf8;
+            --accent: #6366f1;
+            --ring: rgba(99, 102, 241, 0.25);
         }
         * {
             box-sizing: border-box;
@@ -21,8 +22,8 @@
             font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
             color: var(--text);
             background:
-                radial-gradient(900px 500px at 10% -10%, rgba(79, 182, 255, 0.35), transparent 60%),
-                radial-gradient(900px 500px at 90% 10%, rgba(109, 92, 255, 0.35), transparent 60%),
+                radial-gradient(1200px 700px at 85% -10%, rgba(99, 102, 241, 0.35), transparent 60%),
+                radial-gradient(900px 600px at 10% 10%, rgba(56, 189, 248, 0.28), transparent 55%),
                 var(--bg);
             min-height: 100vh;
         }
@@ -31,21 +32,27 @@
             text-decoration: none;
         }
         .container {
-            width: min(1100px, 92vw);
+            width: min(1120px, 92vw);
             margin: 0 auto;
         }
         .nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 26px 0;
+            padding: 22px 0;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            background: linear-gradient(180deg, rgba(11, 16, 32, 0.95), rgba(11, 16, 32, 0.6));
+            backdrop-filter: blur(10px);
+            z-index: 10;
         }
         .brand {
             display: flex;
             align-items: center;
             gap: 12px;
             font-weight: 700;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
         }
         .brand-logo {
             width: 38px;
@@ -56,6 +63,7 @@
             place-items: center;
             color: #0b1020;
             font-weight: 800;
+            box-shadow: 0 12px 24px rgba(56, 189, 248, 0.25);
         }
         .nav-links {
             display: flex;
@@ -63,150 +71,81 @@
             color: var(--muted);
             font-size: 14px;
         }
+        .nav-links a {
+            padding: 6px 10px;
+            border-radius: 999px;
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+        .nav-links a:hover {
+            color: var(--text);
+            background: rgba(148, 163, 184, 0.15);
+        }
         .btn {
             padding: 10px 18px;
             border-radius: 999px;
             font-size: 14px;
             font-weight: 600;
             border: 1px solid transparent;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .btn-primary {
             background: linear-gradient(135deg, var(--brand), var(--accent));
             color: #0b1020;
-            box-shadow: 0 12px 24px rgba(79, 182, 255, 0.25);
-        }
-        .btn-outline {
-            border-color: rgba(154, 166, 200, 0.35);
-            color: var(--text);
+            box-shadow: 0 14px 28px rgba(56, 189, 248, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(56, 189, 248, 0.32);
         }
-        .hero {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 32px;
-            padding: 48px 0 36px;
+        main {
+            padding: 24px 0 52px;
+            background: var(--panel);
+            border-radius: 24px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 40px 80px rgba(6, 10, 24, 0.5);
         }
-        .hero h1 {
+        .page-content {
+            margin-left: 20px;
+            margin-right: 20px;
+            padding: 16px 8px 0;
+        }
+        .page-note {
             margin: 0 0 12px;
-            font-size: clamp(30px, 4vw, 44px);
-        }
-        .hero p {
-            margin: 0 0 20px;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border-radius: 999px;
-            background: rgba(255, 180, 84, 0.15);
-            color: var(--warm);
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 18px;
-        }
-        .card {
-            background: rgba(20, 29, 52, 0.9);
-            border: 1px solid rgba(154, 166, 200, 0.2);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 20px 50px rgba(6, 8, 20, 0.45);
-        }
-        .card h3 {
-            margin: 12px 0 8px;
-            font-size: 18px;
-        }
-        .card p {
-            margin: 0;
             color: var(--muted);
             font-size: 14px;
-            line-height: 1.5;
         }
-        .meta {
-            display: flex;
-            gap: 12px;
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 14px;
-        }
-        .section {
-            padding: 32px 0 50px;
-        }
-        .section h2 {
-            margin: 0 0 10px;
-        }
-        .section p {
-            margin: 0 0 20px;
-            color: var(--muted);
-        }
-        .cta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 22px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, rgba(79, 182, 255, 0.15), rgba(109, 92, 255, 0.2));
-            border: 1px solid rgba(154, 166, 200, 0.2);
-        }
-        .cta h3 {
-            margin: 0 0 6px;
-        }
-        .footer {
-            padding: 24px 0 40px;
-            border-top: 1px solid rgba(154, 166, 200, 0.2);
+        footer {
+            margin-top: 28px;
+            border-top: 1px solid rgba(148, 163, 184, 0.25);
+            padding: 18px 0 32px;
             color: var(--muted);
             font-size: 14px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 12px;
         }
     </style>
-
+    {% block styles %}{% endblock %}
 </head>
 <body>
 
-   <nav class="nav">
+        <nav class="nav">
             <div class="brand">
                 <div class="brand-logo">CT</div>
-                Cloud Track Courses
+                Cloud Track
             </div>
             <div class="nav-links">
-                <a href="">Courses</a>
-                <a href="">Students</a>
-                <a href="">FAQ</a>
+                <a href="/students/landing/">Students</a>
+                <a href="/courses/landing">Courses</a>
             </div>
-            <div class="nav-links">
-                <a class="btn btn-outline" href="#signin">Sign in</a>
-                <a class="btn btn-primary" href="#catalog">Browse courses</a>
-            </div>
+            <a class="btn" href="/students/landing/">Get started</a>
         </nav>
 
-   <div class="container">
-   <div>
-        {% block content %}
-        {% endblock %}
-    </div>
-    <div style="background: green">
-        {% block main %}
-        {% endblock %}
-    </div>
-   </div>
-    <footer class="footer" id="faq">
-            <div>Questions? support@cloudtrack.dev</div>
-            <div>© 2026 Cloud Track Courses. All rights reserved.</div>
-        </footer>
+        <main>
+            <div class="page-content">
+                {% block content %}{% endblock %}
+                {% block main %}{% endblock %}
+            </div>
+        </main>
 
+        <footer>
+            © 2026 Cloud Track. All rights reserved.
+        </footer>
 
 </body>
 </html>

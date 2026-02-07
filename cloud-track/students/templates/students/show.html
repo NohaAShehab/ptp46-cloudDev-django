@@ -1,0 +1,64 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Student Details{% endblock %}
+
+{% block styles %}
+    <style>
+        .details-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 18px 36px rgba(6, 10, 24, 0.28);
+        }
+        .details-header {
+            margin: 0 0 12px;
+            font-size: 24px;
+        }
+        .details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 10px;
+            color: var(--muted);
+        }
+        .details-list strong {
+            color: var(--text);
+        }
+        .details-actions {
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+        }
+        .ghost-btn {
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="details-card">
+        <h1 class="details-header">Student Details</h1>
+        <ul class="details-list">
+            <li><strong>ID:</strong> {{ student.id }}</li>
+            <li><strong>Name:</strong> {{ student.name }}</li>
+            <li><strong>Grade:</strong> {{ student.grade|default:"-" }}</li>
+            <li><strong>Age:</strong> {{ student.age|default:"-" }}</li>
+            {% if student.email %}<li><strong>Email:</strong> {{ student.email }}</li>{% endif %}
+            <li><strong>Gender:</strong> {{ student.get_gender_display|default:"-" }}</li>
+            <li><strong>Created:</strong> {{ student.created_at|date:"Y-m-d H:i" }}</li>
+            <li><strong>Updated:</strong> {{ student.updated_at|date:"Y-m-d H:i" }}</li>
+            {% if student.track %}<li><strong>Track:</strong> {{ student.track }}</li>{% endif %}
+            {% if student.level %}<li><strong>Level:</strong> {{ student.level }}</li>{% endif %}
+        </ul>
+        <div class="details-actions">
+            <a class="ghost-btn" href="/students/index">Back to list</a>
+        </div>
+    </div>
+{% endblock %}

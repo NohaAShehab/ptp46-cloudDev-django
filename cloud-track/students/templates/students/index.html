@@ -1,15 +1,133 @@
 {% extends 'layouts/base.html' %}
 
-<h1> Hello from Students page ....</h1>
+{% block title %}Students{% endblock %}
 
-{% block main %}
-  <h1> Hello from main block </h1>
+{% block styles %}
+    <style>
+        .students-header {
+            margin: 0 0 6px;
+            font-size: 28px;
+        }
+        .students-subtitle {
+            margin: 0 0 20px;
+            color: var(--muted);
+        }
+        .table-wrap {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 16px 32px rgba(6, 10, 24, 0.25);
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        thead {
+            background: rgba(99, 102, 241, 0.18);
+        }
+        th,
+        td {
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+        }
+        th {
+            font-size: 12px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        tbody tr:nth-child(even) {
+            background: rgba(15, 23, 42, 0.35);
+        }
+        tbody tr:hover {
+            background: rgba(56, 189, 248, 0.12);
+        }
+        .name-cell {
+            font-weight: 600;
+            color: var(--text);
+        }
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+        .action-show {
+            background: rgba(56, 189, 248, 0.2);
+            color: #e0f2fe;
+            border-color: rgba(56, 189, 248, 0.35);
+        }
+        .action-edit {
+            background: rgba(99, 102, 241, 0.2);
+            color: #e0e7ff;
+            border-color: rgba(99, 102, 241, 0.35);
+        }
+        .action-delete {
+            background: rgba(248, 113, 113, 0.2);
+            color: #fee2e2;
+            border-color: rgba(248, 113, 113, 0.35);
+        }
+        .students-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 0 0 12px;
+        }
+        .students-toolbar .btn {
+            white-space: nowrap;
+        }
+    </style>
 {% endblock %}
 
-
 {% block content %}
-{{students }}
-{% for student in students %}
-    <li> {{student.name}}</li>
-{% endfor %}
+    <div class="students-toolbar">
+        <div>
+            <h1 class="students-header">Students</h1>
+            <p class="students-subtitle">A quick view of the enrolled students.</p>
+        </div>
+        <a class="btn" href="{% url 'students.create' %}">Add Student</a>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Show</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.id|default:forloop.counter }}</td>
+                    <td class="name-cell">{{ student.name }}</td>
+                    <td>{{ student.email|default:"-" }}</td>
+                    <td>{{ student.get_gender_display|default:"-" }}</td>
+                    <td>
+<!--                        {{student.show_url}}-->
+<!--                        <a class="action-btn action-show" href="{% url 'students.show' student.id %}">Show</a>-->
+                        <a class="action-btn action-show" href="{{student.show_url}}">Show</a>
+
+                    </td>
+                    <td>
+                        <a class="action-btn action-delete" href="{{student.delete_url}}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
 {% endblock %}
