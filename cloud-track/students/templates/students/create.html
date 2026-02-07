@@ -8,17 +8,24 @@
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(148, 163, 184, 0.2);
             border-radius: 18px;
-            padding: 20px;
+            padding: 28px;
             box-shadow: 0 18px 36px rgba(6, 10, 24, 0.28);
             width: 100%;
         }
         .form-title {
-            margin: 0 0 12px;
-            font-size: 24px;
+            margin: 0 0 6px;
+            font-size: 26px;
+            letter-spacing: 0.2px;
+        }
+        .form-subtitle {
+            margin: 0 0 20px;
+            color: var(--muted);
+            font-size: 14px;
         }
         .form-grid {
             display: grid;
-            gap: 14px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px 20px;
         }
         .field {
             display: grid;
@@ -27,20 +34,31 @@
         label {
             font-size: 13px;
             color: var(--muted);
+            font-weight: 600;
+            letter-spacing: 0.2px;
         }
         input,
         select {
-            padding: 10px 12px;
-            border-radius: 12px;
+            padding: 12px 14px;
+            border-radius: 14px;
             border: 1px solid rgba(148, 163, 184, 0.25);
             background: rgba(15, 23, 42, 0.8);
             color: var(--text);
             font-size: 14px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
         }
         .form-actions {
             display: flex;
+            justify-content: flex-end;
             gap: 12px;
-            margin-top: 8px;
+            margin-top: 18px;
         }
         .ghost-btn {
             padding: 10px 16px;
@@ -50,13 +68,17 @@
             font-size: 13px;
             font-weight: 600;
         }
+        .full-width {
+            grid-column: 1 / -1;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
     <div class="form-card">
         <h1 class="form-title">Create Student</h1>
-        <form method="post" >
+        <p class="form-subtitle">Fill out the details below to add a new student.</p>
+        <form method="post">
             {% csrf_token %}
             <div class="form-grid">
                 <div class="field">
@@ -83,7 +105,7 @@
                         <option value="F">Female</option>
                     </select>
                 </div>
-                <div class="field">
+                <div class="field full-width">
                     <label for="image">Image URL</label>
                     <input id="image" name="image" type="text" placeholder="https://...">
                 </div>

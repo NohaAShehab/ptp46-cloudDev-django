@@ -12,42 +12,42 @@
             margin: 0 0 20px;
             color: var(--muted);
         }
-        .table-wrap {
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .student-card {
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(148, 163, 184, 0.2);
             border-radius: 16px;
+            padding: 16px;
             box-shadow: 0 16px 32px rgba(6, 10, 24, 0.25);
-            overflow: hidden;
+            display: grid;
+            gap: 10px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
+        .student-name {
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0;
         }
-        thead {
-            background: rgba(99, 102, 241, 0.18);
-        }
-        th,
-        td {
-            text-align: left;
-            padding: 12px 16px;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
-        }
-        th {
-            font-size: 12px;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
+        .student-meta {
+            list-style: none;
+            padding: 0;
+            margin: 0;
             color: var(--muted);
+            font-size: 13px;
+            display: grid;
+            gap: 6px;
         }
-        tbody tr:nth-child(even) {
-            background: rgba(15, 23, 42, 0.35);
-        }
-        tbody tr:hover {
-            background: rgba(56, 189, 248, 0.12);
-        }
-        .name-cell {
-            font-weight: 600;
+        .student-meta strong {
             color: var(--text);
+            font-weight: 600;
+        }
+        .student-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
         .action-btn {
             display: inline-flex;
@@ -96,38 +96,20 @@
         <a class="btn" href="{% url 'students.create' %}">Add Student</a>
     </div>
 
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>Show</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for student in students %}
-                <tr>
-                    <td>{{ student.id|default:forloop.counter }}</td>
-                    <td class="name-cell">{{ student.name }}</td>
-                    <td>{{ student.email|default:"-" }}</td>
-                    <td>{{ student.get_gender_display|default:"-" }}</td>
-                    <td>
-<!--                        {{student.show_url}}-->
-<!--                        <a class="action-btn action-show" href="{% url 'students.show' student.id %}">Show</a>-->
-                        <a class="action-btn action-show" href="{{student.show_url}}">Show</a>
-
-                    </td>
-                    <td>
-                        <a class="action-btn action-delete" href="{{student.delete_url}}">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+    <div class="cards-grid">
+        {% for student in students %}
+            <article class="student-card">
+                <h2 class="student-name">{{ student.name }}</h2>
+                <ul class="student-meta">
+                    <li><strong>ID:</strong> {{ student.id|default:forloop.counter }}</li>
+                    <li><strong>Email:</strong> {{ student.email|default:"-" }}</li>
+                    <li><strong>Gender:</strong> {{ student.get_gender_display|default:"-" }}</li>
+                </ul>
+                <div class="student-actions">
+                    <a class="action-btn action-show" href="{{ student.show_url }}">Show</a>
+                    <a class="action-btn action-delete" href="{{ student.delete_url }}">Delete</a>
+                </div>
+            </article>
+        {% endfor %}
     </div>
 {% endblock %}
