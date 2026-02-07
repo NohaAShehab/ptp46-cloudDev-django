@@ -3,3 +3,27 @@
 
 
 https://docs.djangoproject.com/en/6.0/ref/templates/builtins/#add
+
+----------- hard coded data --> migrate to database
+you connector --> python to database
+
+ pip install --upgrade pip
+pip install psycopg2-binary
+---
+
+dbname.
+dbuser,
+dbpassword
+portnumber
+dbhost ??
+----------------------
+-- utilize orm sturcture
+--> model class --> define table
+--> take objects from class --> do (crud)
+
+1- writing the models
+https://docs.djangoproject.com/en/6.0/topics/db/models/
+
+
+2- create user on admin dashboard
+    -> python manage.py createsuperuser
