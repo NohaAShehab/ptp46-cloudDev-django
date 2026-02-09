@@ -2,3 +2,8 @@
 # 1- upload image ??
     --> define ==> use files in model
     --> use ImageField
+
+# 2- move the form logic to another files
+==> forms - -> django forms
+https://docs.djangoproject.com/en/6.0/topics/forms/
+

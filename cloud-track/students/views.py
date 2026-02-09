@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 
 from students.models import  Student
+from students.forms import StudentForm, StudentModelForm
+
+
 # Create your views here.
 # what is view --> action will be called when you receive http request
 
@@ -109,11 +112,17 @@ def delete(request, id):
 def create(request):
     print(request) # info about request
     if request.method == "POST":
+        # check email exists in db or not
+        email = request.POST['email']
+        email_found = Student.objects.filter(email=email)
+        if email_found:
+            return render(request, 'students/create.html', context={'errors': "Email found"})
+
+
         # check data sent in the request body
         print(request.POST, request.FILES)
         name = request.POST['name']
         age = request.POST['age']
-        email = request.POST['email']
         grade = request.POST['grade']
         # you choose to upload file --> use enctype: multipart - formdata
         # you find the files ?? FILES
@@ -129,3 +138,36 @@ def create(request):
         return redirect(student.show_url)
 
     return render(request, 'students/create.html')
+
+
+def create_via_form(request):
+    # use the form class
+    form = StudentForm()
+    if request.method == "POST":
+        # check if data passed to the form valid or not ??
+        form = StudentForm(request.POST, request.FILES)
+        print(request.POST)
+        if form.is_valid():
+            # save valid data in form.cleaned_data
+            print(form.cleaned_data) # remove un-necessary spaces --- trim strings
+            # convert empty to null, or none
+            student = Student.objects.create(name=form.cleaned_data['name'],
+                age=form.cleaned_data['age'], email=form.cleaned_data['email'],
+                image=form.cleaned_data['image'], gender=form.cleaned_data['gender'])
+
+            return redirect(student.show_url)
+
+    return render(request, 'students/create_using_form.html',
+                  context={'form': form})
+
+
+def create_via_model_form(request):
+    form = StudentModelForm()
+    if request.method == "POST":
+        form = StudentModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            student = form.save(commit=True)
+            return redirect(student.show_url)
+
+    return render(request, 'students/create_using_form.html',
+                  context={'form': form})

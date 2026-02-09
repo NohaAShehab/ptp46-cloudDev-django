@@ -38,7 +38,8 @@
             letter-spacing: 0.2px;
         }
         input,
-        select {
+        select,
+        textarea {
             padding: 12px 14px;
             border-radius: 14px;
             border: 1px solid rgba(148, 163, 184, 0.25);
@@ -90,45 +91,48 @@
         .full-width {
             grid-column: 1 / -1;
         }
+        .form-stack {
+            display: grid;
+            gap: 14px;
+        }
+        .form-stack p {
+            margin: 0;
+            display: grid;
+            gap: 6px;
+        }
+        .form-stack ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+        .errorlist {
+            list-style: none;
+            padding: 8px 12px;
+            margin: 6px 0 0;
+            border-radius: 12px;
+            background: rgba(248, 113, 113, 0.15);
+            border: 1px solid rgba(248, 113, 113, 0.35);
+            color: #fecaca;
+            font-size: 12px;
+            display: grid;
+            gap: 4px;
+        }
+        .errorlist li {
+            margin: 0;
+        }
     </style>
+
 {% endblock %}
 
 {% block content %}
-{{errors}}
     <div class="form-card">
-        <h1 class="form-title">Create Student</h1>
-        <p class="form-subtitle">Fill out the details below to add a new student.</p>
+        <h1 class="form-title">Add New Student</h1>
+        <p class="form-subtitle">Fill out the form to create a new student record.</p>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-grid">
-                <div class="field">
-                    <label for="name">Name</label>
-                    <input id="name" name="name" type="text" placeholder="Student name" required>
-                </div>
-                <div class="field">
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="email" placeholder="student@example.com">
-                </div>
-                <div class="field">
-                    <label for="grade">Grade</label>
-                    <input id="grade" name="grade" type="number" min="0" placeholder="e.g. 85">
-                </div>
-                <div class="field">
-                    <label for="age">Age</label>
-                    <input id="age" name="age" type="number" min="1" placeholder="e.g. 20">
-                </div>
-                <div class="field">
-                    <label for="gender">Gender</label>
-                    <select id="gender" name="gender">
-                        <option value="">Select</option>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                    </select>
-                </div>
-                <div class="field full-width">
-                    <label for="image">Image URL</label>
-                    <input id="image" name="image" type="file" placeholder="https://...">
-                </div>
+            <div class="form-stack">
+                {{ form.as_table }}
             </div>
             <div class="form-actions">
                 <button class="btn" type="submit">Save</button>
