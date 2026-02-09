@@ -110,12 +110,15 @@ def create(request):
     print(request) # info about request
     if request.method == "POST":
         # check data sent in the request body
-        print(request.POST)
+        print(request.POST, request.FILES)
         name = request.POST['name']
         age = request.POST['age']
         email = request.POST['email']
         grade = request.POST['grade']
-        image = request.POST['image']
+        # you choose to upload file --> use enctype: multipart - formdata
+        # you find the files ?? FILES
+        # image = request.POST['image']
+        image = request.FILES['image']
         gender = request.POST['gender']
         student = Student(name=name, age=age, email=email, grade=grade, image=image,
                           gender=gender)

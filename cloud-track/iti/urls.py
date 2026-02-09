@@ -16,6 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 from students.views import hello, students_index, student_profile, landing
 from courses.views import courses_landing
@@ -24,13 +27,8 @@ urlpatterns = [
     # admin
     path('admin/', admin.site.urls),
     # ___________ students
-    # path('hello', hello, name='hello.test'),
-    # path('index/', students_index, name='students.index'),
-    # # path('index/<id>', student_profile, name='students.profile'),
-    # path('index/<int:id>', student_profile, name='students.profile'),
-    # path('landing/', landing, name='students.landing'),
     path('students/', include('students.urls')),
     # courses
-    # path('courses/', courses_landing, name='courses.index'),
     path('courses/', include('courses.urls')),
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # 127.0.0.1:8000/media/

@@ -17,7 +17,8 @@ class Student(models.Model):
     grade = models.IntegerField(null=True)
     age = models.IntegerField(default=10)
     email = models.EmailField(null=True, unique=True, blank=True)
-    image = models.CharField(max_length=100, null=True, blank=True)
+    # image = models.CharField(max_length=100, null=True, blank=True)
+    image = models.ImageField(upload_to='students/images', null=True, blank=True)
     gender = models.CharField(null=True, blank=True, choices=[("M", "Male"), ("F", "Female")])
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
@@ -38,6 +39,10 @@ class Student(models.Model):
     def delete_url(self):
         delete_url = reverse("students.delete", args=[self.id])
         return delete_url
+
+    @property
+    def image_url(self):
+        return f"/media/{self.image}"
 
 
     @classmethod

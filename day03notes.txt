@@ -1,0 +1,4 @@
+
+# 1- upload image ??
+    --> define ==> use files in model
+    --> use ImageField

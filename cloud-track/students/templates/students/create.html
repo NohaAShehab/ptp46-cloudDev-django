@@ -78,7 +78,7 @@
     <div class="form-card">
         <h1 class="form-title">Create Student</h1>
         <p class="form-subtitle">Fill out the details below to add a new student.</p>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-grid">
                 <div class="field">
@@ -107,7 +107,7 @@
                 </div>
                 <div class="field full-width">
                     <label for="image">Image URL</label>
-                    <input id="image" name="image" type="text" placeholder="https://...">
+                    <input id="image" name="image" type="file" placeholder="https://...">
                 </div>
             </div>
             <div class="form-actions">
