@@ -44,6 +44,7 @@ class DepartmentCreateView(CreateView):
     success_url = '/departments/index'
 
 
+
 class DepartmentDeleteView(DeleteView):
     model = Department
     template_name = 'departments/delete.html'

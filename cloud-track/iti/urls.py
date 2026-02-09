@@ -31,5 +31,7 @@ urlpatterns = [
     # courses
     path('courses/', include('courses.urls')),
     path('departments/', include('departments.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('accounts.urls')),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # 127.0.0.1:8000/media/

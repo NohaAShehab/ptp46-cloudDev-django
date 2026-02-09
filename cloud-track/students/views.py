@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from students.models import  Student
 from students.forms import StudentForm, StudentModelForm
@@ -108,7 +109,7 @@ def delete(request, id):
     return redirect("students.index")
 
 
-
+@login_required()
 def create(request):
     print(request) # info about request
     if request.method == "POST":
