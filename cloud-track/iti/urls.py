@@ -30,5 +30,6 @@ urlpatterns = [
     path('students/', include('students.urls')),
     # courses
     path('courses/', include('courses.urls')),
+    path('departments/', include('departments.urls')),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # 127.0.0.1:8000/media/

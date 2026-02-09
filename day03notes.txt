@@ -13,3 +13,8 @@ https://docs.djangoproject.com/en/6.0/topics/forms/
 # student study many courses  ...  course is studied by many students
 # in model define the relation you want
 
+
+
+# class based views
+
+# authentication app with your project
