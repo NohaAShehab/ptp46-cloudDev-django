@@ -1,0 +1,143 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Create Course{% endblock %}
+
+{% block styles %}
+    <style>
+        .form-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 18px 36px rgba(6, 10, 24, 0.28);
+            width: 100%;
+        }
+        .form-title {
+            margin: 0 0 6px;
+            font-size: 26px;
+            letter-spacing: 0.2px;
+        }
+        .form-subtitle {
+            margin: 0 0 20px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px 20px;
+        }
+        .field {
+            display: grid;
+            gap: 6px;
+        }
+        label {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+        input,
+        select,
+        textarea {
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--text);
+            font-size: 14px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+        }
+        input[type="file"] {
+            padding: 10px 12px;
+            border-style: dashed;
+            cursor: pointer;
+        }
+        input[type="file"]::file-selector-button {
+            margin-right: 12px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        input[type="file"]::file-selector-button:hover {
+            border-color: rgba(56, 189, 248, 0.6);
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .ghost-btn {
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        .form-stack {
+            display: grid;
+            gap: 14px;
+        }
+        .form-stack p {
+            margin: 0;
+            display: grid;
+            gap: 6px;
+        }
+        .form-stack ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+        .errorlist {
+            list-style: none;
+            padding: 8px 12px;
+            margin: 6px 0 0;
+            border-radius: 12px;
+            background: rgba(248, 113, 113, 0.15);
+            border: 1px solid rgba(248, 113, 113, 0.35);
+            color: #fecaca;
+            font-size: 12px;
+            display: grid;
+            gap: 4px;
+        }
+        .errorlist li {
+            margin: 0;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+    <div class="form-card">
+        <h1 class="form-title">Add New Course</h1>
+        <p class="form-subtitle">Fill out the form to create a new course record.</p>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-stack">
+                {{ form.as_p }}
+            </div>
+            <div class="form-actions">
+                <button class="btn" type="submit">Save</button>
+                <a class="ghost-btn" href="{% url 'courses.landing'%}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

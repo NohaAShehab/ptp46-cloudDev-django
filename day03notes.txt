@@ -7,3 +7,9 @@
 ==> forms - -> django forms
 https://docs.djangoproject.com/en/6.0/topics/forms/
 
+
+# relationship ??
+# implement relationship between courses, students
+# student study many courses  ...  course is studied by many students
+# in model define the relation you want
+

@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'students',
     'students.apps.StudentsConfig',
-    'courses.apps.CoursesConfig'
+    'courses.apps.CoursesConfig',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

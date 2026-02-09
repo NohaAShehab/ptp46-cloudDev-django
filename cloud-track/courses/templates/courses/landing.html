@@ -118,6 +118,16 @@
             border-radius: 12px;
             margin-top: 12px;
         }
+        .card-actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+        }
+        .card-actions .btn-outline,
+        .card-actions .btn-primary {
+            font-size: 12px;
+            padding: 8px 12px;
+        }
     </style>
 {% endblock %}
 
@@ -155,10 +165,13 @@
                 <span class="pill">Cloud</span>
                 <h3>{{ course.name }}</h3>
                 <img width="200" height="200"
-                     src="{% static 'courses/images/'|add:course.image %}" alt="{{ course.name }}">
+                     src="{{course.image_url}}" alt="{{ course.name }}">
                 <div class="meta">
-                    <span>6 modules</span>
-                    <span>18 labs</span>
+                    <span>{{course.modules}} modules</span>
+                    <span>{{course.tabs}} labs</span>
+                </div>
+                <div class="card-actions">
+                    <a class="btn-primary" href="{% url 'courses.show' course.id %}">Show</a>
                 </div>
             </div>
             {% endfor %}
